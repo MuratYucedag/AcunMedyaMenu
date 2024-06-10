@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AcunMedyaMenu.Context;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AcunMedyaMenu.Controllers
 {
     public class DefaultController : Controller
     {
+        MenuContext context = new MenuContext();
         public IActionResult Index()
         {
             return View();
@@ -39,7 +41,8 @@ namespace AcunMedyaMenu.Controllers
         }
         public PartialViewResult PartialTeam()
         {
-            return PartialView();
+            var values = context.Chefs.Where(x => x.Status == true).ToList();
+            return PartialView(values);
         }
         public PartialViewResult PartialFeature()
         {
