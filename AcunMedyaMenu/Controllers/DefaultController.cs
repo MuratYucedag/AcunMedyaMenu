@@ -1,4 +1,5 @@
 ﻿using AcunMedyaMenu.Context;
+using AcunMedyaMenu.Entites;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AcunMedyaMenu.Controllers
@@ -8,6 +9,9 @@ namespace AcunMedyaMenu.Controllers
         MenuContext context = new MenuContext();
         public IActionResult Index()
         {
+            ViewBag.p1 = "250 yıllık sırlarla dolu özel odamıza hoşgeldiniz. Burası AcunMedya bir odaya sığan kocaman dostluklar, kutlamalar, özel anlaşmalar ve davetleri için Olden tutkunlarına açıldı. Eski bir hikayede yeni uzun sofralar kurmak için rezervasyon yaptırmanız yeterli.";
+
+            ViewBag.p2 = "Geçmişin değerlerini içselleştirip onları bugünle buluşturarak geleceğe taşıyan tohumları atmayı hedefleyen Lacivert, menüsünü bu anlayışla hazırlıyor. Menümüzün klasikleşen lezzetlerine, yeni ve çarpıcı dokunuşlar da ekleyerek mevsimselliği ve yerelin güzelliklerini yansıtan bir çerçeve içinde hareket ediyoruz, daha bilinçli bir tüketimi hedefliyoruz.";
             return View();
         }
         public PartialViewResult PartialHead()
@@ -41,8 +45,8 @@ namespace AcunMedyaMenu.Controllers
         }
         public PartialViewResult PartialTeam()
         {
-            var values = context.Chefs.Where(x => x.Status == true).ToList();
-            return PartialView(values);
+           // var values = context.Chefs.Where(x => x.Status == true).ToList();
+            return PartialView();
         }
         public PartialViewResult PartialFeature()
         {
@@ -51,6 +55,21 @@ namespace AcunMedyaMenu.Controllers
         public PartialViewResult PartialAbout()
         {
             return PartialView();
+        }
+
+        [HttpGet]
+        public PartialViewResult CreateBooking()
+        { 
+            return PartialView();
+        }
+
+        [HttpPost]
+        public IActionResult CreateBooking(Booking booking)
+        {
+            booking.Description = "Rezervasyon Alındı";
+            context.Bookings.Add(booking);
+            context.SaveChanges();
+            return View();
         }
     }
 }

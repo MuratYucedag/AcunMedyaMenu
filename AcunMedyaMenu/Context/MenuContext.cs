@@ -11,5 +11,6 @@ namespace AcunMedyaMenu.Context
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Chef> Chefs { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
     }
 }
