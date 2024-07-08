@@ -28,7 +28,6 @@ namespace AcunMedyaMenu.Controllers
             }
 
         }
-
         public async Task<IActionResult> SeriesList()
         {
             var client = new HttpClient();
